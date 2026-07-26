@@ -5,11 +5,11 @@ active in development
 
 - [x] **Phase 0: Core Monolith & REST API**
   - Setup Spring Boot, PostgreSQL, & JPA Entities.
-  - Integrasi Feign Client untuk validasi data antar-service.
+  - and added Feign Client for validation data us-service.
 
 - [x] **Phase 1: Event-Driven Architecture (Kafka)**
-  - Implementasi Kafka Producer di Order Service.
-  - Consumer di Driver Service untuk update status asynchronous.
+  - Implementation Kafka Producer in Order Service.
+  - Create Consumer for Driver Service to update status the driver status (asynchronous).
 
 ---
 
