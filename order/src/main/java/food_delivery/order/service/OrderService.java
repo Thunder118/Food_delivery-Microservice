@@ -9,6 +9,8 @@ import food_delivery.order.model.Order;
 import food_delivery.order.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,13 +31,13 @@ public class OrderService {
 
         RestaurantDto restaurants = restaurantClient.getRestaurantById(request.getRestaurantId());
         if (restaurants == null) {
-            throw new IllegalArgumentException("Restoran tidak ditemukan untuk ID: " + request.getRestaurantId());
+            throw new IllegalArgumentException("Restaurant not found for ID: " + request.getRestaurantId());
         }
 
 
         DriverDto driver = driverClient.getDriverById(request.getDriverId());
         if (driver == null || !"AVAILABLE".equalsIgnoreCase(driver.getStatus())) {
-            throw new IllegalStateException("Driver tidak tersedia!");
+            throw new IllegalStateException("Driver Not Available!");
         }
 
 
@@ -56,6 +58,7 @@ public class OrderService {
         return savedOrder;
     }
 
+    @Cacheable(value = "order", key = "#id")
     public Order getOrderById(Long id) {
         return orderRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Order Not Found for ID: " + id));

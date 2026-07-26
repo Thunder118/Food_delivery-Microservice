@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/public/drivers")
-@RequiredArgsConstructor // @Data dihapus
+@RequiredArgsConstructor
 public class DriverController {
 
     private final DriverService driverService;
@@ -17,7 +17,7 @@ public class DriverController {
     @PostMapping
     public ResponseEntity<Driver> createDriver(@RequestBody Driver driver) {
         Driver newDriver = driverService.createDriver(driver);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newDriver); // Return 201 Created
+        return ResponseEntity.status(HttpStatus.CREATED).body(newDriver);
     }
 
     @GetMapping("/{id}")

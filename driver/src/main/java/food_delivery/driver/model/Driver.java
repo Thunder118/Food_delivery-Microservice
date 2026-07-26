@@ -6,17 +6,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "drivers")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Driver {
+public class Driver implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Diubah dari 'Id' ke 'id'
+    private Long id;
 
     private String name;
     private String phoneNumber;

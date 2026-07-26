@@ -17,6 +17,6 @@ public class OrderCreatedEvent {
     private Long customerId;
     private Long restaurantId;
     private Long driverId;
-    private BigDecimal totalAmount; // Diubah ke BigDecimal untuk presisi nilai uang
+    private BigDecimal totalAmount;
     private String status;
 }

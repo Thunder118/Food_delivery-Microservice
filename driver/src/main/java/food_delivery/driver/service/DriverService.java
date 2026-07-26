@@ -3,11 +3,13 @@ package food_delivery.driver.service;
 import food_delivery.driver.model.Driver;
 import food_delivery.driver.repository.DriverRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@RequiredArgsConstructor // Menggantikan @AllArgsConstructor & @Data dihapus
+@RequiredArgsConstructor
 public class DriverService {
 
     private final DriverRepository driverRepository;
@@ -19,7 +21,8 @@ public class DriverService {
     }
 
     @Transactional
-    public Driver assignAvailableDriver() { // Typo diperbaiki
+    @CacheEvict(value = "driver", key = "#result.id")
+    public Driver assignAvailableDriver() {
         Driver driver = driverRepository.findFirstByStatus("AVAILABLE")
                 .orElseThrow(() -> new IllegalStateException("Tidak ada driver yang tersedia saat ini"));
 
@@ -28,7 +31,8 @@ public class DriverService {
     }
 
     @Transactional(readOnly = true)
-    public Driver getDriverById(Long id) { // Typo nama method diperbaiki
+    @Cacheable(value = "driver", key = "#id")
+    public Driver getDriverById(Long id) {
         return driverRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Driver tidak ditemukan untuk ID: " + id));
     }

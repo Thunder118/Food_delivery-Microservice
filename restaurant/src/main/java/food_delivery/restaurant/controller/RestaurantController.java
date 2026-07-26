@@ -5,6 +5,7 @@ import food_delivery.restaurant.model.Restaurant;
 import food_delivery.restaurant.model.RestaurantStatus;
 import food_delivery.restaurant.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +16,8 @@ public class RestaurantController {
 
     @Autowired
     private RestaurantService restaurantService;
+    @Autowired
+    private RedisCacheManager cacheManager;
 
     @PostMapping
     public Restaurant createRestaurant(@RequestBody Restaurant restaurant) {
@@ -34,6 +37,12 @@ public class RestaurantController {
     @PatchMapping("/{id}/status")
     public Restaurant updateStatus(@PathVariable Long id, @RequestParam RestaurantStatus status){
         return  restaurantService.updateStatus(id, status);
+    }
+
+    @DeleteMapping("/clear-cache")
+    public  String clearCache() {
+        cacheManager.getCacheNames().forEach(name -> cacheManager.getCache(name).clear());
+        return "All cache in Redis success clean!";
     }
 
 }

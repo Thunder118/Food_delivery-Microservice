@@ -4,19 +4,21 @@ import food_delivery.driver.dto.OrderCreatedEvent;
 import food_delivery.driver.repository.DriverRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor // Menggunakan Constructor Injection
+@RequiredArgsConstructor
 public class OrderKafkaConsumer {
 
     private final DriverRepository driverRepository;
 
     @KafkaListener(topics = "order-created-topic", groupId = "driver-group")
     @Transactional
+    @CacheEvict(value = "driver", key = "#event.driverId")
     public void consumeOrderCreatedEvent(OrderCreatedEvent event) {
         log.info("📩 [Kafka Consumer] Menerima event order baru: Order ID {} untuk Driver ID {}",
                 event.getOrderId(), event.getDriverId());
