@@ -35,7 +35,3 @@ active in development
 - **22 July 2026:** Set up Spring Boot, PostgreSQL, and JPA Entities; added Feign Client for user-service data validation.
 - **25 July 2026:** Set up Kafka Broker and tested Kafka Producer & Consumer via Postman (verified `OrderCreated` event published to topic).
 - **26 July 2026:** Integrated Redis caching layer for menu data and reduced response time to under 5ms.
-
-- **22 July 2026**: Set up Spring Boot, PostgreSQL, and JPA Entities; added Feign Client for user-service data validation.
-- **25 July 2026**: Set up Kafka Broker and tested Kafka Producer & Consumer via Postman (verified `OrderCreated` event published to topic).
-- **26 July 2026**: *(Planned)* Optimize event payload & prepare Redis integration.
