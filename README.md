@@ -10,8 +10,9 @@ active in development
 - [x] **Phase 1: Event-Driven Architecture (Kafka)**
   - Implemented Kafka Producer in Order Service.
   - Created Consumer in Driver Service for asynchronous status updates.
-- [ ] **Phase 2: Caching Layer (Redis)**
-
+- [x] **Phase 2: Caching Layer (Redis)**
+  - Integrated Redis In-Memory Data Store to cache restaurant menu data.
+  - **Goal:** Handled heavy traffic by serving menu queries under 5ms without hitting PostgreSQL repeatedly.
 ----
 
 ### ⏳ Ongoing & Next Roadmap
