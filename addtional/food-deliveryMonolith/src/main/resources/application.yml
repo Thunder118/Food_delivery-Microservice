@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: app
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:M@
+  jpa:
+   show-sql: true
+   hibernate:
+     ddl-auto: create
