@@ -7,6 +7,7 @@ import food_delivery.order.dto.OrderCreatedEvent;
 import food_delivery.order.dto.RestaurantDto;
 import food_delivery.order.model.Order;
 import food_delivery.order.repository.OrderRepository;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
@@ -35,7 +36,7 @@ public class OrderService {
         }
 
 
-        DriverDto driver = driverClient.getDriverById(request.getDriverId());
+        DriverDto driver = getDriverWithCircuitBreaker(request.getDriverId());
         if (driver == null || !"AVAILABLE".equalsIgnoreCase(driver.getStatus())) {
             throw new IllegalStateException("Driver Not Available!");
         }
@@ -56,6 +57,21 @@ public class OrderService {
         orderKafkaProducer.sendOrderCreatedEvent(event);
 
         return savedOrder;
+    }
+
+    @CircuitBreaker(name = "driverServiceCB", fallbackMethod = "fallbackGetDriver")
+    public  DriverDto getDriverWithCircuitBreaker(Long driverId) {
+        return driverClient.getDriverById(driverId);
+    }
+
+    public DriverDto fallbackGetDriver(Long driverId, Throwable throwable) {
+        log.error("⚠️ [Circuit Breaker] Driver Service Down/Error! Cause: {}", throwable.getMessage());
+
+        DriverDto fallbackDriver = new DriverDto();
+        fallbackDriver.setId(driverId);
+        fallbackDriver.setName("UNKNOWN_DRIVER");
+        fallbackDriver.setName("SERVICE_DOWN");
+        return fallbackDriver;
     }
 
     @Cacheable(value = "order", key = "#id")
