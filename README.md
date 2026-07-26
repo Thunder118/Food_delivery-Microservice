@@ -10,15 +10,23 @@ active in development
 - [x] **Phase 1: Event-Driven Architecture (Kafka)**
   - Implemented Kafka Producer in Order Service.
   - Created Consumer in Driver Service for asynchronous status updates.
+- [ ] **Phase 2: Caching Layer (Redis)**
 
 ----
 
 ### ⏳ Ongoing & Next Roadmap
 
-- [ ] **Phase 2: Caching Layer (Redis)** ⏳ *(in progress)
-- [ ] **Phase 3: Resilience & Circuit Breaker (Resilience4j)**
-- [ ] **Phase 4: API Gateway & Service Discovery (Eureka)**
-- [ ] **Phase 5: Observability & Tracing (Zipkin / Prometheus)**
+- [ ] **Phase 3: Resilience & Fault Tolerance (Resilience4j / Circuit Breaker)** ⏳ *(in progress)
+  - Implement Circuit Breaker in Order Service to isolate Driver Service failures.
+  - Provide fallback responses (e.g., *"Driver search is busy, order queued"*) when downstream services go down.
+
+- [ ] **Phase 4: API Gateway & Service Discovery (Spring Cloud Gateway + Eureka)**
+  - Centralize entry point on port 8080 (routing, JWT security, and Rate Limiting).
+  - Hide direct backend service ports (8081, 8082, 8083) and enable dynamic discovery.
+
+- [ ] **Phase 5: Centralized Observability & Tracing (Zipkin / Prometheus / Grafana)**
+  - Implement Distributed Tracing (`Trace ID`) across Gateway → Order → Kafka → Driver Service.
+  - Monitor microservices health and visualize performance metrics.
 
 ----
 
