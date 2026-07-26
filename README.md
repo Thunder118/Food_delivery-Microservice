@@ -17,7 +17,7 @@ active in development
 
 ### ⏳ Ongoing & Next Roadmap
 
-- [ ] **Phase 3: Resilience & Fault Tolerance (Resilience4j / Circuit Breaker)** ⏳ *(in progress)
+- [ ] **Phase 3: Resilience & Fault Tolerance (Resilience4j / Circuit Breaker)** ⏳ *(In Progress)*
   - Implement Circuit Breaker in Order Service to isolate Driver Service failures.
   - Provide fallback responses (e.g., *"Driver search is busy, order queued"*) when downstream services go down.
 
