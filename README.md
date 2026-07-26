@@ -9,13 +9,13 @@ active in development
 
 - [x] **Phase 1: Event-Driven Architecture (Kafka)**
   - Implementation Kafka Producer in Order Service.
-  - Create Consumer for Driver Service to update status the driver status (asynchronous).
+  - Created Consumer in Driver Service for asynchronous status updates.
 
 ---
 
 ### ⏳ Ongoing & Next Roadmap
 
-- [ ] **Phase 2: Caching Layer (Redis)** ⏳ *(on progress)
+- [ ] **Phase 2: Caching Layer (Redis)** ⏳ *(in progress)
 - [ ] **Phase 3: Resilience & Circuit Breaker (Resilience4j)**
 - [ ] **Phase 4: API Gateway & Service Discovery (Eureka)**
 - [ ] **Phase 5: Observability & Tracing (Zipkin / Prometheus)**
