@@ -1,0 +1,42 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: API-GATEWAY
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          lower-case-service-id: true
+          enabled: true
+
+      routes:
+        - id: restaurant-service-route
+          uri: lb://RESTAURANT-SERVICE
+          predicates:
+            - Path=/public/restaurants/**
+#          filters:
+#            - RewritePath=/public/(?<segment>.*), /${segment}
+
+        - id: driver-service-route
+          uri: lb://DRIVER-SERVICE
+          predicates:
+            - Path=/public/drivers/**
+#          filters:
+#            - RewritePath=/public/(?<segment>.*), /${segment}
+
+        - id: order-service-route
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/public/orders/**
+#          filters:
+#            - RewritePath=/public/(?<segment>.*), /${segment}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
