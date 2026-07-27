@@ -17,6 +17,10 @@ spring:
         spring.json.trusted.packages: "*"
         spring.json.use.type.headers: false
         spring.json.value.default.type: food_delivery.driver.dto.OrderCreatedEvent
+    template:
+      observation-enabled: true
+    listener:
+      observation-enabled: true
 
   datasource:
     url: jdbc:postgresql://localhost:5432/driver
@@ -24,13 +28,28 @@ spring:
     password: M@m2
     driver-class-name: org.postgresql.Driver
 
-
   jpa:
     database: POSTGRESQL
     show-sql: true
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  management:
+    tracing:
+      sampling:
+        probability: 1.0
+    zipkin:
+      tracing:
+        endpoint: http://localhost:9411/api/v2/spans
+    endpoints:
+      web:
+        exposure:
+          include: "*"
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
 
 eureka:
   client:

@@ -5,7 +5,10 @@ import food_delivery.driver.repository.DriverRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
+import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,4 +34,6 @@ public class OrderKafkaConsumer {
             }, () -> log.warn("⚠️ Driver dengan ID {} tidak ditemukan", event.getDriverId()));
         }
     }
+
+
 }
