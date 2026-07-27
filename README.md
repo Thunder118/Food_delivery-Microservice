@@ -13,15 +13,13 @@ active in development
 - [x] **Phase 2: Caching Layer (Redis)**
   - Integrated Redis In-Memory Data Store to cache restaurant menu data.
   - **Goal:** Handled heavy traffic by serving menu queries under 5ms without hitting PostgreSQL repeatedly.
+- [x] **Phase 3: Resilience & Fault Tolerance (Resilience4j / Circuit Breaker)** 
+  - Implement Circuit Breaker in Order Service to isolate Driver Service failures.
+  - Provide fallback responses (e.g., *"Driver search is busy, order queued"*) when downstream services go down.
 ----
 
 ### ⏳ Ongoing & Next Roadmap
-
-- [ ] **Phase 3: Resilience & Fault Tolerance (Resilience4j / Circuit Breaker)** ⏳ *(In Progress)*
-  - Implement Circuit Breaker in Order Service to isolate Driver Service failures.
-  - Provide fallback responses (e.g., *"Driver search is busy, order queued"*) when downstream services go down.
-
-- [ ] **Phase 4: API Gateway & Service Discovery (Spring Cloud Gateway + Eureka)**
+- [ ] **Phase 4: API Gateway & Service Discovery (Spring Cloud Gateway + Eureka)** ⏳ *(In Progress)*
   - Centralize entry point on port 8080 (routing, JWT security, and Rate Limiting).
   - Hide direct backend service ports (8081, 8082, 8083) and enable dynamic discovery.
 
