@@ -16,14 +16,14 @@ active in development
 - [x] **Phase 3: Resilience & Fault Tolerance (Resilience4j / Circuit Breaker)** 
   - Implement Circuit Breaker in Order Service to isolate Driver Service failures.
   - Provide fallback responses (e.g., *"Driver search is busy, order queued"*) when downstream services go down.
+- [x] **Phase 4: API Gateway & Service Discovery (Spring Cloud Gateway + Eureka)** 
+  - Centralize entry point on port 8080 (routing, JWT security, and Rate Limiting).
+  - Hide direct backend service ports (8081, 8082, 8083) and enable dynamic discovery.
 ----
 
 ### ⏳ Ongoing & Next Roadmap
-- [ ] **Phase 4: API Gateway & Service Discovery (Spring Cloud Gateway + Eureka)** ⏳ *(In Progress)*
-  - Centralize entry point on port 8080 (routing, JWT security, and Rate Limiting).
-  - Hide direct backend service ports (8081, 8082, 8083) and enable dynamic discovery.
 
-- [ ] **Phase 5: Centralized Observability & Tracing (Zipkin / Prometheus / Grafana)**
+- [ ] **Phase 5: Centralized Observability & Tracing (Zipkin / Prometheus / Grafana)** ⏳ *(In Progress)*
   - Implement Distributed Tracing (`Trace ID`) across Gateway → Order → Kafka → Driver Service.
   - Monitor microservices health and visualize performance metrics.
 
@@ -32,4 +32,5 @@ active in development
 ## 📅 Dev Log (Progress Harian)
 - **22 July 2026:** Set up Spring Boot, PostgreSQL, and JPA Entities; added Feign Client for user-service data validation.
 - **25 July 2026:** Set up Kafka Broker and tested Kafka Producer & Consumer via Postman (verified `OrderCreated` event published to topic).
-- **26 July 2026:** Integrated Redis caching layer for menu data and reduced response time to under 5ms.
+- **26 July 2026:** Integrated Redis caching layer and implemented Resilience4j Circuit Breaker with fallback mechanism.
+- * 27 July 2026: Configured Spring Cloud Gateway on port 8080 and integrated Eureka Server for dynamic service discovery across microservices.
