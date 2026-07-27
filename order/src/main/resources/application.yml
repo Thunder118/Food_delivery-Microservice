@@ -22,18 +22,37 @@ spring:
       circuitbreaker:
         enabled: true
 
-
   kafka:
     bootstrap-servers: localhost:9092
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    template:
+      observation-enabled: true
+    listener:
+      observation-enabled: true
+
+  management:
+    tracing:
+      sampling:
+        probability: 1.0
+    zipkin:
+      tracing:
+        endpoint: http://localhost:9411/api/v2/spans
+    endpoints:
+      web:
+        exposure:
+          include: "*"
 
 services:
   driver:
     url: http://localhost:8081/public/drivers
   restaurant:
     url: http://localhost:8082/public/restaurants
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
 
 eureka:
   client:
