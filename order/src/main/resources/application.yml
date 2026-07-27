@@ -1,32 +1,28 @@
+server:
+  port: 8084
+
 spring:
   application:
-    name: order-service
+    name: ORDER-SERVICE
+
   datasource:
     url: jdbc:postgresql://localhost:5432/orderdb
     username: M@m2
     password: M@m2
+
   jpa:
     database: POSTGRESQL
     show-sql: true
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
   cloud:
     openfeign:
       circuitbreaker:
         enabled: true
-        driverServiceCB:
-          sliding-window-size: 5
-          failure-rate-threshold: 50
-          wait-duration-in-open-state: 10000ms
-          permitted-number-of-calls-in-half-open-state: 2
-        restaurantServiceCB:
-          sliding-window-size: 5
-          failure-rate-threshold: 50
-          wait-duration-in-open-state: 10000ms
-  feign:
-    circuitbreaker:
-      enabled: true
+
+
   kafka:
     bootstrap-servers: localhost:9092
     producer:
@@ -39,6 +35,33 @@ services:
   restaurant:
     url: http://localhost:8082/public/restaurants
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      driverServiceCB:
+        sliding-window-size: 5
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10000ms
+        permitted-number-of-calls-in-half-open-state: 2
+      restaurantServiceCB:
+        sliding-window-size: 5
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10000ms
+  timelimiter:
+    instances:
+      driverServiceCB:
+        timeout-duration: 10s
+      restaurantServiceCB:
+        timeout-duration: 10s
+
+
 #  h2:
 #    console:
 #      enabled: true
@@ -49,5 +72,5 @@ services:
 #    hibernate:
 #      ddl-auto: create
 
-server:
-  port: 8084
+
+

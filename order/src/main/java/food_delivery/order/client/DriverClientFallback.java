@@ -15,7 +15,7 @@ public class DriverClientFallback implements DriverClient {
         DriverDto fallbackDriver = new DriverDto();
         fallbackDriver.setId(id);
         fallbackDriver.setName("DRIVER_SERVICE_UNAVAILABLE");
-        fallbackDriver.setStatus("BUSY");
+        fallbackDriver.setStatus("UNAVAILABLE");
         return  fallbackDriver;
     }
 }

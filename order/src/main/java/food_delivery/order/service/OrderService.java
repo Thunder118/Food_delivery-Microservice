@@ -36,7 +36,7 @@ public class OrderService {
         }
 
 
-        DriverDto driver = getDriverWithCircuitBreaker(request.getDriverId());
+        DriverDto driver = driverClient.getDriverById(request.getDriverId());
         if (driver == null || !"AVAILABLE".equalsIgnoreCase(driver.getStatus())) {
             throw new IllegalStateException("Driver Not Available!");
         }
