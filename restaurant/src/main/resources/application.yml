@@ -11,6 +11,10 @@ spring:
     password: M@m2
     driver-class-name: org.postgresql.Driver
 
+  kafka:
+    listener:
+      observation-enabled: true
+
   jpa:
     database: POSTGRESQL
     show-sql: true
@@ -28,19 +32,16 @@ spring:
         time-to-live: 600000
 
 management:
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
     tracing:
-      sampling:
-        probability: 1.0
-    zipkin:
-      tracing:
-        endpoint: "http://localhost:9411/api/v2/spans"
-      otlp:
-        tracing:
-          endpoint: "http://localhost:9411/api/v2/spans"
-    endpoints:
-      web:
-        exposure:
-          include: "*"
+      endpoint: http://localhost:9411/api/v2/spans
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 logging:
   pattern:

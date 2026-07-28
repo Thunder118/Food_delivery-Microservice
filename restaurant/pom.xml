@@ -75,17 +75,19 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Tracing Bridge -->
 		<dependency>
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-tracing-bridge-brave</artifactId>
 		</dependency>
 
-		<!-- Reporter Zipkin untuk mengirim data trace ke Zipkin Server -->
+		<!-- Zipkin Reporter untuk kirim data ke Zipkin -->
 		<dependency>
 			<groupId>io.zipkin.reporter2</groupId>
 			<artifactId>zipkin-reporter-brave</artifactId>
 		</dependency>
 
+		<!-- Sender HTTP Zipkin (Penyebab utama tidak terkirim) -->
 		<dependency>
 			<groupId>io.zipkin.reporter2</groupId>
 			<artifactId>zipkin-sender-urlconnection</artifactId>
