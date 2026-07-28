@@ -19,13 +19,13 @@ active in development
 - [x] **Phase 4: API Gateway & Service Discovery (Spring Cloud Gateway + Eureka)** 
   - Centralize entry point on port 8080 (routing, JWT security, and Rate Limiting).
   - Hide direct backend service ports (8081, 8082, 8083) and enable dynamic discovery.
+- [x] **Phase 5: Centralized Observability & Tracing (Zipkin / Prometheus / Grafana)**
+  - Implement Distributed Tracing (`Trace ID`) across Gateway → Order → Kafka → Driver Service.
+  - Monitor microservices health and visualize performance metrics.
 ----
 
 ### ⏳ Ongoing & Next Roadmap
 
-- [ ] **Phase 5: Centralized Observability & Tracing (Zipkin / Prometheus / Grafana)** ⏳ *(In Progress)*
-  - Implement Distributed Tracing (`Trace ID`) across Gateway → Order → Kafka → Driver Service.
-  - Monitor microservices health and visualize performance metrics.
 
 ----
 
@@ -34,4 +34,5 @@ active in development
 - **25 July 2026:** Set up Kafka Broker and tested Kafka Producer & Consumer via Postman (verified `OrderCreated` event published to topic).
 - **26 July 2026:** Integrated Redis caching layer and implemented Resilience4j Circuit Breaker with fallback mechanism.
 - **27 July 2026:** Configured Spring Cloud Gateway on port 8080 and integrated Eureka Server for dynamic service discovery across microservices.
-"* Phase 5 Completed" 
+- **28 July 2026:** Implemented Centralized Observability & Tracing with Zipkin, Prometheus, and Grafana across microservices.
+ 
