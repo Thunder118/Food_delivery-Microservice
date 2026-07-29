@@ -6,9 +6,9 @@ spring:
     name: ORDER-SERVICE
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/orderdb
-    username: M@m2
-    password: M@m2
+    url: jdbc:postgresql://postgres-db:5432/food_delivery_db
+    username: M2m2
+    password: M2m4
 
   jpa:
     database: POSTGRESQL
@@ -23,7 +23,7 @@ spring:
         enabled: true
 
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: kafka:9092
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
@@ -38,7 +38,7 @@ spring:
         probability: 1.0
     zipkin:
       tracing:
-        endpoint: http://localhost:9411/api/v2/spans
+        endpoint: http://openzipkin:9411/api/v2/spans
     endpoints:
       web:
         exposure:
@@ -46,9 +46,9 @@ spring:
 
 services:
   driver:
-    url: http://localhost:8081/public/drivers
+    url: http://driver-service:8082/public/drivers
   restaurant:
-    url: http://localhost:8082/public/restaurants
+    url: http://restaurant-service:8081/public/restaurants
 
 logging:
   pattern:
@@ -57,7 +57,7 @@ logging:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://discovery-server:8761/eureka/
     fetch-registry: true
     register-with-eureka: true
 

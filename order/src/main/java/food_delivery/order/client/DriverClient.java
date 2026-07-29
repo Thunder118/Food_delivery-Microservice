@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
-@FeignClient(name = "DRIVER-SERVICE",url = "http://localhost:8082", fallback = DriverClientFallback.class)
+@FeignClient(name = "DRIVER-SERVICE",url = "${services.driver.url}", fallback = DriverClientFallback.class)
 public interface DriverClient {
 
-    @GetMapping("/public/drivers/{id}")
+    @GetMapping("/{id}")
     DriverDto getDriverById(@PathVariable("id") Long id);
 }
