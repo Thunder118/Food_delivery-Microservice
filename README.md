@@ -22,6 +22,10 @@ active in development
 - [x] **Phase 5: Centralized Observability & Tracing (Zipkin / Prometheus / Grafana)**
   - Implement Distributed Tracing (`Trace ID`) across Gateway → Order → Kafka → Driver Service.
   - Monitor microservices health and visualize performance metrics.
+- [x] **Phase 6: Orchestration & Deployment (Docker & Kubernetes)** (In Progress)
+  * Containerize all microservices using optimized multi-stage `Dockerfile`.
+  * Orchestrate local infrastructure (Services, PostgreSQL, Redis, Kafka, Zipkin) via `docker-compose.yml`.
+  * Define Kubernetes manifests (`deployment.yaml`, `service.yaml`) for auto-scaling and cloud orchestration.
 ----
 
 ### ⏳ Ongoing & Next Roadmap
@@ -34,5 +38,6 @@ active in development
 - **25 July 2026:** Set up Kafka Broker and tested Kafka Producer & Consumer via Postman (verified `OrderCreated` event published to topic).
 - **26 July 2026:** Integrated Redis caching layer and implemented Resilience4j Circuit Breaker with fallback mechanism.
 - **27 July 2026:** Configured Spring Cloud Gateway on port 8080 and integrated Eureka Server for dynamic service discovery across microservices.
-- **28 July 2026:** Implemented Centralized Observability & Tracing with Zipkin, Prometheus, and Grafana across microservices.
+- **28 July 2026:** Implemented Centralized Observability & Tracing with Zipkin, Prometheus, and Grafana across microservices
+- **29 July 2026:** Started Phase 6 setup by containerizing services with Dockerfiles and configuring multi-container docker-compose deployment.
  
