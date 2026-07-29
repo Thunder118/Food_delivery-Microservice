@@ -17,22 +17,16 @@ spring:
           uri: lb://RESTAURANT-SERVICE
           predicates:
             - Path=/public/restaurants/**
-#          filters:
-#            - RewritePath=/public/(?<segment>.*), /${segment}
 
         - id: driver-service-route
           uri: lb://DRIVER-SERVICE
           predicates:
             - Path=/public/drivers/**
-#          filters:
-#            - RewritePath=/public/(?<segment>.*), /${segment}
 
         - id: order-service-route
           uri: lb://ORDER-SERVICE
           predicates:
             - Path=/public/orders/**
-#          filters:
-#            - RewritePath=/public/(?<segment>.*), /${segment}
 
 management:
   tracing:
@@ -40,11 +34,11 @@ management:
       probability: 1.0
   zipkin:
     tracing:
-      endpoint: http://localhost:9411/api/v2/spans
+      endpoint: http://openzipkin:9411/api/v2/spans
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://discovery-server:8761/eureka/
     fetch-registry: true
     register-with-eureka: true

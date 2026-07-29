@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: driver-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: driver-service
+  template:
+    metadata:
+      labels:
+        app: driver-service
+    spec:
+      containers:
+        - name: driver-service
+          image: m2mm/driver-service:v1
+          ports:
+            - containerPort: 8082
+          env:
+            - name: SPRING_DATA_REDIS_HOST
+              value: "redis"
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:postgresql://postgres-db:5432/driver"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: driver-service
+spec:
+  ports:
+    - port: 8082
+  selector:
+    app: driver-service
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: restaurant-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: restaurant-service
+  template:
+    metadata:
+      labels:
+        app: restaurant-service
+    spec:
+      containers:
+        - name: restaurant-service
+          image: m2mm/restaurant-service:v1
+          ports:
+            - containerPort: 8081
+          env:
+            - name: SPRING_DATA_REDIS_HOST
+              value: "redis"
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:postgresql://postgres-db:5432/restaurant"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: restaurant-service
+spec:
+  ports:
+    - port: 8081
+  selector:
+    app: restaurant-service
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-service
+  template:
+    metadata:
+      labels:
+        app: order-service
+    spec:
+      containers:
+        - name: order-service
+          image: m2mm/order-service:v1
+          ports:
+            - containerPort: 8084
+          env:
+            - name: SERVICES_DRIVER_URL
+              value: "http://driver-service:8082/public/drivers"
+            - name: SERVICES_RESTAURANT_URL
+              value: "http://driver-service:8082/public/restaurant"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-service
+spec:
+  ports:
+    - port: 8084
+  selector:
+    app: order-service
