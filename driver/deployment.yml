@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: restaurant-service-deployment
+  name: driver-service-deployment
 spec:
   replicas: 3 # Menjalankan 3 instansi sekaligus
   selector:
     matchLabels:
-      app: restaurant-service
+      app: driver-service
   template:
     metadata:
       labels:
-        app: restaurant-service
+        app: driver-service
     spec:
       containers:
-        - name: restaurant-service
-          image: restaurant-service:latest
+        - name: driver-service
+          image: driver-service:latest
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8081
+            - containerPort: 8082
