@@ -5,6 +5,7 @@ spring:
   application:
     name: DISCOVERY-SERVER
 
+
 eureka:
   client:
     register-with-eureka: false
